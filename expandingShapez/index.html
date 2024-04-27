@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Something</title>
+    <style>
+        :root {
+            --hue: 216;
+            box-sizing: border-box;
+            height: 100%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        * {
+            box-sizing: inherit;
+        }
+        html {
+            background-color: hsl(var(--hue), 100%, 99%);
+        }
+        body {
+            width: 80%;
+            margin: 0 auto;
+            padding: 2rem 0;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        canvas {
+            border: 0.3rem hsl(var(--hue), 100%, 50%) solid;
+            border-radius: 0.75rem;
+            box-shadow: 0 0 1rem hsla(var(--hue), 100%, 50%, 50%);
+            background-color: white;
+        }
+        button {
+            /* margin-top: 1rem; */
+            border-radius: 0.75rem;
+            padding: 0.5rem;
+            border: 0.3rem hsl(var(--hue), 100%, 50%) solid;
+            background-color: white;
+            color: hsl(var(--hue), 100%, 50%);
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 0.2rem;
+            width: 100%;
+
+            transition: .3s all;
+        }
+        button:hover {
+            background-color: hsl(var(--hue), 100%, 50%);
+            color: white;
+            cursor: pointer;
+
+            transition: .3s all;
+        }
+        div {
+            width: 100%;
+        }
+        input, select {
+            width: 100%;
+            padding: 0.5em;
+        }
+        div.top {
+            border: 2px hsl(var(--hue), 100%, 50%) solid;
+            border-radius: 0.75rem;
+            padding: 0.75rem;
+        }
+        div.flex {
+            display: flex;
+            justify-content: space-between;
+            align-content: center;
+        }
+        div.flex input {
+            width: 48%;
+        }
+        div.flex span {
+            font-size: 1.2em;
+        }
+        h3 {
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.2rem;
+        }
+        p, a {
+            width: 100%;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="kanvas"></canvas>
+    <button onclick="execute()">Execute</button>
+    <div class="top">
+        <h3>Customization</h3>
+        <div>
+            <label>Shape aspect ratio(doesn't affect circles)</label>
+            <div class="flex">
+                <input oninput="updateVal()" type="number" min=0 id="Aspect1">
+                <span>/</span>
+                <input oninput="updateVal()" type="number" min=0 id="Aspect2">
+            </div>
+        </div>
+        <div>
+            <label for="maxWidth">Max width / diameter(for circle)</label>
+            <input oninput="updateVal()" type="number" min=0 id="maxWidth">
+        </div>
+        <div>
+            <label for="strokeWidth">Line size</label>
+            <input oninput="updateVal()" type="number" min=0 id="strokeWidth">
+        </div>
+        <div>
+            <label for="shape">Shape</label>
+            <select oninput="updateVal()" id="shape">
+                <option value="rectangle">Rectangle</option>
+                <option value="circle">Circle</option>
+            </select>
+        </div>
+        <div>
+            <label for="delay">Delay</label>
+            <input oninput="updateVal()" type="number" min=0 id="delay">
+        </div>
+        <div>
+            <label for="step">Step size</label>
+            <input oninput="updateVal()" type="number" min=0 id="step">
+        </div>
+        <div>
+            <label for="hue">Hue</label>
+            <input oninput="updateVal()" type="number" min=0 id="hue">
+        </div>
+    </div>
+    <a href="https://www.desmos.com/calculator/b3uwt6blwk" target="_blank">Animation graph</a>
+    <script src="script.js"></script>
+</body>
+</html>
