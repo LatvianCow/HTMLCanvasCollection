@@ -18,6 +18,8 @@ function update() {
     for(let key in customization) {
         customization[key] = Number(document.getElementById(key).value)
     }
+    minGap = customization.minGapMult * customization.size
+    document.body.style.setProperty('--hue', customization.hue)
 }
 
 const canvas = document.getElementById('kanvas')
@@ -69,7 +71,7 @@ function draw() {
 
     stars.forEach((star) => {   
         ctx.fillStyle = `rgba(255, 255, 255, 1)`
-        ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`
+        ctx.strokeStyle = `hsl(${customization.hue}, 100%, 50%)`
         ctx.lineWidth = customization.strokeSize * star.dist
         
         let rotation = (star.x * 31 + star.y * 17 + rotationAlt) % 90
