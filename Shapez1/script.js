@@ -31,7 +31,7 @@ let aspect1 = 1
 let aspect2 = 1
 let aspectRatio = aspect1 / aspect2 // width / height
 let shapeStrokeWidth = 10
-let shape = 'rectangle' // rectangle | circle
+let cShape = 'rectangle' // 0 = rectangle | 1 = circle
 let step = 50
 let delay = 5
 
@@ -39,7 +39,7 @@ document.getElementById('Aspect1').value = aspect1
 document.getElementById('Aspect2').value = aspect2
 document.getElementById('maxWidth').value = maxWidth
 document.getElementById('strokeWidth').value = shapeStrokeWidth
-document.getElementById('shape').value = shape
+document.getElementById('shape').value = cShape
 document.getElementById('step').value = step
 document.getElementById('delay').value = delay
 document.getElementById('hue').value = hue
@@ -57,7 +57,7 @@ addEventListener('mouseup', (event) => {
         activeShapes.push({
             x: x,
             y: y,
-            shape: shape,
+            shape: cShape,
             size: 0
         })
     }
@@ -81,8 +81,6 @@ function progressShapes() {
     }
 
     activeShapes = newActiveShapes
-
-    // console.log(JSON.stringify(activeShapes))
 }
 
 setInterval(() => {
@@ -91,19 +89,17 @@ setInterval(() => {
     ctx.lineWidth = shapeStrokeWidth
     activeShapes.forEach((shape) => {
         let koef = shapeAnim(shape.size)
-        console.log(`${shape.size} | ${koef}`)
 
         ctx.strokeStyle = `hsla(${hue}, 100%, 50%, ${(1 - koef) * 100}%)`
 
         let vidth = maxWidth * koef
         let haigth = maxWidth / aspectRatio * koef
-        console.log(`${vidth} – ${haigth}`)
 
         switch(shape.shape) {
             case 'rectangle':
                 ctx.strokeRect(shape.x - vidth / 2, shape.y - haigth / 2, vidth, haigth)
                 break
-            case 'circle':
+            case 'circle': // Circle
                 ctx.beginPath()
 
                 ctx.arc(shape.x, shape.y, vidth / 2, 0, Math.PI * 2)
@@ -118,11 +114,12 @@ setInterval(() => {
 
 function execute() {
     for(let i = 0; i < CWidth; i += step) {
+        console.log(`Pushing i: ${i}`)
         setTimeout(() => {
             activeShapes.push({
                 x: i,
                 y: CHeight / 2,
-                shape: 'rectangle',
+                shape: cShape,
                 size: 0
             }, 100)
         }, i / step * delay)
@@ -139,14 +136,16 @@ function updateVal() {
     document.getElementById('delay').value = Math.max(Number(document.getElementById('delay').value), 0)
 
     // Applies the new values
-    aspect1 = document.getElementById('Aspect1').value
-    aspect2 = document.getElementById('Aspect2').value
+    aspect1 = Number(document.getElementById('Aspect1').value)
+    aspect2 = Number(document.getElementById('Aspect2').value)
     aspectRatio = aspect1 / aspect2
-    maxWidth = document.getElementById('maxWidth').value
-    shapeStrokeWidth = document.getElementById('strokeWidth').value
-    shape = document.getElementById('shape').value
-    step = document.getElementById('step').value
-    delay = document.getElementById('delay').value
-    hue = document.getElementById('hue').value
+    maxWidth = Number(document.getElementById('maxWidth').value)
+    shapeStrokeWidth = Number(document.getElementById('strokeWidth').value)
+    cShape = document.getElementById('shape').value
+    step = Number(document.getElementById('step').value)
+    delay = Number(document.getElementById('delay').value)
+    hue = Number(document.getElementById('hue').value)
     document.body.style.setProperty('--hue', hue)
+
+    console.log(`maxWidth: ${maxWidth}; shapeStrokeWidth: ${shapeStrokeWidth}; cShape: ${cShape}; step: ${step}; delay: ${delay}`)
 }
