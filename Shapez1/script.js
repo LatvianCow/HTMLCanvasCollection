@@ -146,6 +146,4 @@ function updateVal() {
     delay = Number(document.getElementById('delay').value)
     hue = Number(document.getElementById('hue').value)
     document.body.style.setProperty('--hue', hue)
-
-    console.log(`maxWidth: ${maxWidth}; shapeStrokeWidth: ${shapeStrokeWidth}; cShape: ${cShape}; step: ${step}; delay: ${delay}`)
 }
