@@ -2,7 +2,7 @@ const canvas = document.getElementById('kanvas')
 
 let rect, CWidth, CHeight
 function onResize() {
-    let bWidth = getComputedStyle(document.body).width.slice(0, -2)
+    let bWidth = getComputedStyle(canvas.parentElement).width.slice(0, -2)
     let aspectRatio = 1 / 2
 
     CWidth = bWidth
