@@ -2,11 +2,12 @@ const canvas = document.getElementById('kanvas')
 
 let rect, CWidth, CHeight
 function onResize() {
-    let bWidth = getComputedStyle(canvas.parentElement).width.slice(0, -2)
+    let pStyle = getComputedStyle(canvas.parentElement)
+    let pWidth = pStyle.width.slice(0, -2) - pStyle.paddingLeft.slice(0, -2) - pStyle.paddingRight.slice(0, -2)
     let aspectRatio = 1 / 2
 
-    CWidth = bWidth
-    CHeight = bWidth * aspectRatio
+    CWidth = pWidth
+    CHeight = pWidth * aspectRatio
     
     canvas.setAttribute('width', CWidth)
     canvas.setAttribute('height', CHeight)
@@ -114,7 +115,6 @@ setInterval(() => {
 
 function execute() {
     for(let i = 0; i < CWidth; i += step) {
-        console.log(`Pushing i: ${i}`)
         setTimeout(() => {
             activeShapes.push({
                 x: i,
