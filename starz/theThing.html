@@ -5,14 +5,6 @@
     <link rel="stylesheet" href="/style.css">
     <title>Stars</title>
     <style>
-        body {
-            --hue: 220;
-        }
-        main {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
         main > *:first-child { /* Usually the canvas or element containing the canvas */
             margin-bottom: 1rem;
         }
@@ -21,43 +13,8 @@
             overflow: hidden;
             box-shadow: 0.5rem 0.5rem 1.5rem rgba(0, 0, 0, 0.5);
         }
-        #customization {
-            display: flex;
-            flex-direction: column;
-            border: 0.2rem hsl(var(--hue), 100%, 50%) solid;
-        }
-        #customization > div:not(:first-of-type) {
-            margin-top: 0.5rem;
-        }
         canvas {
             filter: blur(7px);
-        }
-        button {
-            width: 100%;
-            padding: 0.5em;
-            background-color: transparent;
-            border: 0.2rem hsl(var(--hue), 100%, 50%) solid;
-            font-size: 1em;
-            font-weight: 600;
-            letter-spacing: 0.05rem;
-        }
-        button:hover {
-            color: white;
-            background-color: hsl(var(--hue), 100%, 40%);
-            border: 0.2rem hsl(var(--hue), 100%, 40%) solid;
-        }
-        label {
-            display: block;
-            margin-bottom: 0.2rem;
-        }
-        input {
-            width: 100%;
-            padding: 0.2rem;
-            border: 1px hsl(var(--hue), 100%, 50%) solid;
-            outline: none;
-        }
-        input:focus {
-            background-color: hsl(var(--hue), 100%, 98%);
         }
     </style>
 </head>
