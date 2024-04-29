@@ -7,24 +7,66 @@
     <style>
         :root {
             box-sizing: border-box;
-            --hue: 216;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --hue: 220;
         }
         * {
             box-sizing: inherit;
+            font-family: inherit;
         }
         body {
             margin: 0;
             padding: 1rem;
             width: min(80%, 800px);
             margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
         }
-        div {
+        body > *:first-child { /* Usually the canvas or element containing the canvas */
+            margin-bottom: 1rem;
+        }
+        #kanvBG {
             background-color: black;
             overflow: hidden;
             box-shadow: 0.5rem 0.5rem 1.5rem rgba(0, 0, 0, 0.5);
         }
+        #customization {
+            display: flex;
+            flex-direction: column;
+            border: 0.2rem hsl(var(--hue), 100%, 50%) solid;
+        }
+        #customization > div:not(:first-of-type) {
+            margin-top: 0.5rem;
+        }
         canvas {
             filter: blur(7px);
+        }
+        button {
+            padding: 0.5em;
+            background-color: transparent;
+            border: 0.2rem hsl(var(--hue), 100%, 50%) solid;
+            font-size: 1em;
+            font-weight: 600;
+            letter-spacing: 0.05rem;
+        }
+        button:hover {
+            color: white;
+            background-color: hsl(var(--hue), 100%, 40%);
+            border: 0.2rem hsl(var(--hue), 100%, 40%) solid;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.2rem;
+        }
+        input {
+            width: 100%;
+            padding: 0.2rem;
+            border: 1px hsl(var(--hue), 100%, 50%) solid;
+            outline: none;
+        }
+        input:focus {
+            background-color: hsl(var(--hue), 100%, 98%);
         }
         @media (max-width: 700px) {
             body {
@@ -34,9 +76,51 @@
     </style>
 </head>
 <body>
-    <div>    
+    <div id="kanvBG">    
         <canvas id="kanvas"></canvas>
     </div>
+
+    <button onclick="gen()">
+        Regenerate
+    </button>
+
+    <fieldset id="customization">
+        <legend>Customization</legend>
+
+        <div>
+            <label for="size">Max size</label>
+            <input oninput="update()" type="number" id="size">
+        </div>
+        <div>
+            <label for="strokeSize">Stroke size</label>
+            <input oninput="update()" type="number" id="strokeSize">
+        </div>
+        <div>
+            <label for="rotIncr">Rotation increment</label>
+            <input oninput="update()" type="number" id="rotIncr">
+        </div>
+        <div>
+            <label for="minGapMult">Min gap(size * ...)</label>
+            <input oninput="update()" type="number" id="minGapMult">
+        </div>
+        <div>
+            <label for="maxCount">Max count</label>
+            <input oninput="update()" type="number" id="maxCount">
+        </div>
+        <div>
+            <label for="maxSpawnAttempts">Max spawn attempts(Can cause lag with high max count)</label>
+            <input oninput="update()" type="number" id="maxSpawnAttempts">
+        </div>
+        <div>
+            <label for="controlPoint">Star quadratic curve control point pos relative to center</label>
+            <input oninput="update()" type="number" id="controlPoint">
+        </div>
+        <div>
+            <label for="hue">Hue</label>
+            <input oninput="update()" type="number" id="hue">
+        </div>
+    </fieldset>
+
     <script src="script.js"></script>
 </body>
 </html>
