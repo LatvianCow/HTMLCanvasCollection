@@ -26,7 +26,7 @@ let hue = Number(getComputedStyle(document.body).getPropertyValue('--hue'))
 let CWidth, CHeight
 function onResize() {
     let bStyle = getComputedStyle(canvas.parentElement.parentElement)
-    let bodyWidth = bStyle.width.slice(0, -2) - 2 * bStyle.padding.slice(0, -2)
+    let bodyWidth = bStyle.width.slice(0, -2) - bStyle.paddingLeft.slice(0, -2) - bStyle.paddingRight.slice(0, -2)
     let ARatio = 2 / 3
 
     canvas.setAttribute('width', bodyWidth)
