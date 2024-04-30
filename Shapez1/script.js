@@ -15,7 +15,7 @@ function onResize() {
     canvas.setAttribute('height', CHeight)
 
     rect = canvas.getBoundingClientRect()
-} onResize(); addEventListener('resize', onResize)
+} onResize(); addEventListener('resize', onResize); addEventListener('scroll', onResize)
 
 
 // function, which returns based off of x
