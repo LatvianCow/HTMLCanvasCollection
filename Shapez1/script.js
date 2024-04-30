@@ -1,5 +1,7 @@
 const canvas = document.getElementById('kanvas')
 
+
+// Adjusts canva's size to take up full width of its parent element
 let rect, CWidth, CHeight
 function onResize() {
     let pStyle = getComputedStyle(canvas.parentElement)
@@ -15,13 +17,15 @@ function onResize() {
     rect = canvas.getBoundingClientRect()
 } onResize(); addEventListener('resize', onResize)
 
+
+// function, which returns based off of x
 function shapeAnim(x) {
     return Math.abs(
         Math.pow(-x, 9) - Math.pow(1 / (x + 1.4), 5) + 1.05
     )
 }
 
-//VSCode specifiska lieta
+
 /** @type {CanvasRenderingContext2D} */
 const ctx = canvas.getContext('2d')
 let hue = Number(getComputedStyle(document.body).getPropertyValue('--hue'))
@@ -45,6 +49,7 @@ document.getElementById('step').value = step
 document.getElementById('delay').value = delay
 document.getElementById('hue').value = hue
 
+
 let activeShapes = []
 
 // Registers a new shape
@@ -63,6 +68,7 @@ addEventListener('mouseup', (event) => {
         })
     }
 })
+
 
 function progressShapes() {
     // smol optimization
@@ -84,10 +90,13 @@ function progressShapes() {
     activeShapes = newActiveShapes
 }
 
+
 setInterval(() => {
     ctx.clearRect(0, 0, CWidth, CHeight)
 
     ctx.lineWidth = shapeStrokeWidth
+
+    // Draws all of the shapes
     activeShapes.forEach((shape) => {
         let koef = shapeAnim(shape.size)
 
@@ -113,6 +122,8 @@ setInterval(() => {
     progressShapes()
 }, 20)
 
+
+// Executes "The thing"
 function execute() {
     for(let i = 0; i < CWidth; i += step) {
         setTimeout(() => {
@@ -126,6 +137,8 @@ function execute() {
     }
 }
 
+
+// Updates values whenever user inputs something
 function updateVal() {
     // Makes sure that there are no negative values, if there are makes those zero
     document.getElementById('Aspect1').value = Math.max(Number(document.getElementById('Aspect1').value), 0)
